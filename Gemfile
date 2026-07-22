@@ -36,6 +36,7 @@ gem "image_processing", "~> 2.0"
 # gem "rack-cors"
 
 group :development, :test do
+  gem "bundler-audit", require: false
   gem "faker"
   gem "factory_bot_rails"
   gem "pry"
