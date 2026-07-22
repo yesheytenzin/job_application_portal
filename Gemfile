@@ -15,19 +15,18 @@ gem "kamal", require: false
 gem "thruster", require: false
 gem "image_processing", "~> 1.2"
 
-
 group :development, :test do
-  gem 'faker'
-  gem 'factory_bot_rails'
-  gem 'pry'
-  gem 'rubocop-rails-omakase', require: false
-  gem 'rubocop-rspec', require: false
-  gem 'rubocop-faker', require: false
-  gem 'rubocop-rake', require: false
+  gem "faker"
+  gem "factory_bot_rails"
+  gem "pry"
+  gem "rubocop-rails-omakase", require: false
+  gem "rubocop-rspec", require: false
+  gem "rubocop-faker", require: false
+  gem "rubocop-rake", require: false
+  gem "brakeman", require: false
 end
 
 group :test do
-  gem 'rspec-rails'
-  gem 'simplecov', require: false
+  gem "rspec-rails"
+  gem "simplecov", require: false
 end
- 
