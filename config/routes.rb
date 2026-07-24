@@ -8,6 +8,6 @@ Rails.application.routes.draw do
     },
     controllers: {
       sessions: "api/v1/auth/sessions",
-      registrations: "api/v1/auth/registrations",
+      registrations: "api/v1/auth/registrations"
     }
 end
