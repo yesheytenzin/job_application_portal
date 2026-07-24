@@ -3,11 +3,11 @@
 class Api::V1::Auth::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-
+  include "sanitizers"
   respond_to :json
 
   def create
-    build_resource(user_sanitizer.sign_up_params)
+    build_resource(sign_up_params)
 
     resource.save
     if resource.persisted?
@@ -25,11 +25,5 @@ class Api::V1::Auth::RegistrationsController < Devise::RegistrationsController
         errors: resource.errors.as_json
       }, status: :unprocessable_entity
     end
-  end
-
-  private
-
-  def user_sanitizer
-    UserParamsSanitizer.new(params)
   end
 end

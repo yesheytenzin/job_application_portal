@@ -55,3 +55,4 @@ group :test do
 end
 
 gem "devise"
+gem "shoulda-matchers", "~> 8.0"
