@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 module Sanitizers
-  module Users
-    module UserSanitizer
+  module Auth
+    module AuthSanitizer
+      private
       def sign_up_params
         params.require(:user).permit(:email, :password, :password_confirmation)
       end
