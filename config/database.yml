@@ -29,7 +29,7 @@ development:
 
 test:
   <<: *default
-  database: job_application_portal_test
+  database: <%= ENV.fetch("DB_TEST_NAME" , "job_application_portal_test" ) %>
 
 production:
   primary: &primary_production
