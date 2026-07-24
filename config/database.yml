@@ -25,7 +25,7 @@ default: &default
 
 development:
   <<: *default
-  database: <%= ENV.fetch("DB_NAME") %>
+  database: <%= ENV.fetch("DB_NAME", "job_application_portal_development" ) %>
 
 test:
   <<: *default

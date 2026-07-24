@@ -15,20 +15,20 @@ module ErrorResponder
   private
   # 400 bad request
   def handle_bad_request(exception)
-    render(status: :bad_request, message: exception.message)
+    render json: { message: exception.message }, status: :bad_request
   end
   # 401 unauthorized
   def handle_unauthenticated(exception)
-    render(status: :unauthorized, message: exception.message || "you must login first")
+    render json: { essage: exception.message || "you must login first" }, status: :unauthorized
   end
   # 404 not found
   def handle_not_found(exception)
-    render json: { status: :not_found, message: "The request could not be found." }
+    render json: { message: "The request could not be found." }, status: :not_found
   end
 
   def internal_server_error(exception)
     Rails.logger.error "#{exception.class}" "#{exception.message}: \n" + exception.backtrace.first(10).join("\n")
     message = Rails.env.production? ? "Unexpected error occurred" : exception.message
-    render(status: :internal_server_error, message: message)
+    render json: { message: exception.message }, status: :internal_server_error
   end
 end
