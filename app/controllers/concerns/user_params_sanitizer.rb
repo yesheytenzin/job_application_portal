@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
-class ResgisterParamsSanitizer
+class UserParamsSanitizer
   def initialize(params)
     @params = params
   end
 
   def sign_up_params
-    @params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    @params.require(:user).permit(:email, :password, :password_confirmation)
+  end
+
+  def sign_in_params
+    @params.require(:user).permit(:email, :password, :password_confirmation)
   end
 end
