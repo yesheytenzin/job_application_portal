@@ -28,8 +28,8 @@ module ErrorResponder
   end
 
   def internal_server_error(exception)
-    Rails.logger.error "#{exception.class}" "#{exception.message}: \n" + exception.backtrace.first(10).join("\n")
-    message = Rails.env.production? ? "Unexpected error occurred" : exception.message
+    Rails.logger.error '#{exception.class}' "#{exception.message}: \n" + exception.backtrace.first(10).join("\n")
+    message = Rails.env.production? ? 'Unexpected error occurred' : exception.message
     render_error(:internal_server_error, exception.message)
   end
 
