@@ -9,7 +9,7 @@ class Api::V1::Auth::SessionsController < Devise::SessionsController
     sign_in(resource_name, resource)
 
     render json: {
-      message: "Successfully logged in",
+      message: 'Successfully logged in',
       user: {
         id: resource.id, email: resource.email
       }
@@ -19,7 +19,7 @@ class Api::V1::Auth::SessionsController < Devise::SessionsController
   def destroy
     sign_out(resource_name)
     render json: {
-      message: "Successfully logged out"
+      message: 'Successfully logged out'
     }, status: :ok
   end
 end

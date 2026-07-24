@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe "Api::V1:Auth:Registrations", type: :request do
-  let!(:user) { create(:user) }
+RSpec.describe 'Api::V1:Auth:Registrations', type: :request do
+  let(:user) { create(:user) }
 
-  describe "POST /api/v1/auth/sign_up" do
-    context "with valid credentials" do
+  describe 'POST /api/v1/auth/sign_up' do
+    context 'with valid credentials' do
       subject(:sign_up_request) do
         post user_registration_path, params: { user: valid_user_params }
         response
@@ -14,14 +14,14 @@ RSpec.describe "Api::V1:Auth:Registrations", type: :request do
 
       let(:valid_user_params) { attributes_for(:user) }
 
-      it "test registration" do
+      it 'test registration' do
         sign_up_request
         expect(response).to have_http_status(:created)
         expect(json[:user][:email]).to eq valid_user_params[:email]
       end
     end
 
-    context "with invalid credentials" do
+    context 'with invalid credentials' do
       subject(:sign_up_request) do
         post user_registration_path, params: { user: invalid_user_params }
         response
@@ -37,9 +37,9 @@ RSpec.describe "Api::V1:Auth:Registrations", type: :request do
         }
       }
 
-      it "test registration fail" do
+      it 'test registration fail' do
         sign_up_request
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
   end

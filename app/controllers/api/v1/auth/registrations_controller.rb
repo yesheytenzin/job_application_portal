@@ -3,7 +3,7 @@
 class Api::V1::Auth::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-  include "sanitizers"
+  include Sanitizers::Users::UserSanitizer
   respond_to :json
 
   def create
@@ -13,7 +13,7 @@ class Api::V1::Auth::RegistrationsController < Devise::RegistrationsController
     if resource.persisted?
       sign_in(resource_name, resource)
       render json: {
-        message: "Signed up successfully and logged in",
+        message: 'Signed up successfully and logged in',
         user: {
           id: resource.id,
           email: resource.email
