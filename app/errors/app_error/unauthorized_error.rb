@@ -2,8 +2,8 @@
 
 module AppError
   class UnauthorizedError < BaseError
-    def initialize(message = nil, status: :unauthorized)
-      super I18n.t('errors.unauthorized'), status
+    def initialize(message = I18n.t('errors.unauthorized'), status: :unauthorized)
+      super message, status
     end
   end
 end

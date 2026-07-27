@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module AppError
-  class NotFound < BaseError
-    def initialize(message = nil, status: :not_found)
-      super I18n.t('errors.not_found'), status
+  class NotFoundError < BaseError
+    def initialize(message = I18n.t('errors.not_found'), status: :not_found)
+      super message, status
     end
   end
 end
