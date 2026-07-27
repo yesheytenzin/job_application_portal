@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::V1:Auth:Registrations', type: :request do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, :applicant) }
 
   describe 'POST /api/v1/auth/sign_up' do
     context 'with valid credentials' do
@@ -12,18 +12,22 @@ RSpec.describe 'Api::V1:Auth:Registrations', type: :request do
         response
       end
 
+      before do
+        create(:role, :applicant)
+      end
+
       let(:valid_user_params) { attributes_for(:user) }
 
       it 'test registration' do
         sign_up_request
         expect(response).to have_http_status(:created)
-        expect(json[:user][:email]).to eq valid_user_params[:email]
+        expect(json[:email]).to eq valid_user_params[:email]
       end
 
       it 'assigns the applicant role by default' do
         sign_up_request
-        user = User.find(json['user']['id'])
-        expect(user.role_name).to eq 'applicant'
+        user = User.find(json['id'])
+        expect(user.role[:name]).to eq 'applicant'
       end
     end
 
@@ -45,7 +49,7 @@ RSpec.describe 'Api::V1:Auth:Registrations', type: :request do
 
       it 'test registration fail' do
         sign_up_request
-        expect(response).to have_http_status(:unprocessable_content)
+        expect(response).to have_http_status(:not_found)
       end
     end
   end

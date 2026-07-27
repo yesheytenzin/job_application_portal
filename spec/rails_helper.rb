@@ -50,11 +50,6 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-  config.before(:suite) do
-    Role.find_or_create_by!(name: 'admin')
-    Role.find_or_create_by!(name: 'applicant')
-  end
-
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 

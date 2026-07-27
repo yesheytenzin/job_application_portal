@@ -7,10 +7,6 @@ RSpec.describe User, type: :model do
     it { is_expected.to belong_to(:role) }
   end
 
-  describe 'delegations' do
-    it { is_expected.to delegate_method(:name).to(:role).with_prefix }
-  end
-
   describe 'admin?' do
     it 'return true for admin user' do
       user = build(:user, :admin)

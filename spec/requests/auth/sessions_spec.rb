@@ -18,7 +18,7 @@ RSpec.describe 'Api::V1::Auth::Sessions', type: :request do
       it 'for Login tests' do
         sign_in_request
         expect(response).to have_http_status(:ok)
-        expect(json.with_indifferent_access['user']['email']).to eq(valid_user_params[:email])
+        expect(json.with_indifferent_access['email']).to eq(valid_user_params[:email])
         expect(response.headers['Set-Cookie']).to be_present
       end
     end
