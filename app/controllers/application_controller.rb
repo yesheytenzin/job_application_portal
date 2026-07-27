@@ -2,7 +2,6 @@ class ApplicationController < ActionController::API
   include ActionController::Cookies
   include ActionController::RequestForgeryProtection
   include ErrorResponder
-  include RoleAuthorizable
   # protect_from_forgery with: :exception
 
   before_action :authenticate_user!
