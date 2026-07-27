@@ -13,10 +13,7 @@ class Api::V1::Auth::RegistrationsController < Devise::RegistrationsController
 
     if resource.persisted?
       sign_in(resource_name, resource)
-      render json: {
-        message: 'Signed up successfully and logged in',
-        user: JSON.parse(User::UserSerializer.render(resource))
-      }, status: :created
+      render json: User::UserSerializer.render(resource)
     else
       clean_up_passwords(resource)
       render json: {

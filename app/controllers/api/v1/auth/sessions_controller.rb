@@ -7,11 +7,7 @@ class Api::V1::Auth::SessionsController < Devise::SessionsController
   def create
     self.resource = warden.authenticate!(auth_options)
     sign_in(resource_name, resource)
-
-    render json: {
-      message: 'Successfully logged in',
-      user: JSON.parse(User::UserSerializer.render(resource))
-    }, status: :ok
+    render json: User::UserSerializer.render(resource)
   end
 
   def destroy
