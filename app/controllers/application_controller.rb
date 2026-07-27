@@ -4,6 +4,7 @@ class ApplicationController < ActionController::API
   include ErrorResponder
   # protect_from_forgery with: :exception
 
+  # include RoleAuthorizable
   before_action :authenticate_user!
 
   private
