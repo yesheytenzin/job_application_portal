@@ -3,4 +3,15 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # :recoverable :rememberable
   devise :database_authenticatable, :registerable, :validatable
+  belongs_to :role
+  validates :role, presence: true
+  delegate :name, to: :role, prefix: true
+
+  def admin?
+    role_name == Role::ADMIN
+  end
+
+  def applicant?
+    role_name == Role::APPLICANT
+  end
 end

@@ -3,12 +3,42 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   subject(:user) { build(:user) }
 
+  describe 'associations' do
+    it { is_expected.to belong_to(:role) }
+  end
+
+  describe 'delegations' do
+    it { is_expected.to delegate_method(:name).to(:role).with_prefix }
+  end
+
+  describe 'admin?' do
+    it 'return true for admin user' do
+      user = build(:user, :admin)
+      expect(user.admin?).to be true
+    end
+
+    it 'return false for non-admin user' do
+      user = build(:user, :applicant)
+      expect(user.admin?).to be false
+    end
+  end
+
+  describe 'applicant?' do
+    it 'return true for applicant user' do
+      user = build(:user, :applicant)
+      expect(user.applicant?).to be true
+    end
+  end
+
+
   describe 'devise modules' do
     it 'includes Devise modules' do
       expect(described_class.devise_modules).to contain_exactly(:database_authenticatable, :registerable, :validatable)
     end
 
     describe 'validations' do
+      subject(:user) { create(:user) }
+
       it { is_expected.to be_valid }
       it { is_expected.to validate_presence_of(:email) }
       it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
