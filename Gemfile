@@ -46,7 +46,6 @@ group :development, :test do
   gem "rubocop-rake", require: false
   gem "brakeman", require: false
   gem "dotenv-rails"
-  gem "blueprinter", require: false
 end
 
 group :test do
@@ -56,3 +55,4 @@ end
 
 gem "devise"
 gem "shoulda-matchers", "~> 8.0"
+gem "blueprinter"

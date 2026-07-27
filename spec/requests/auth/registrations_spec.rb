@@ -19,6 +19,12 @@ RSpec.describe 'Api::V1:Auth:Registrations', type: :request do
         expect(response).to have_http_status(:created)
         expect(json[:user][:email]).to eq valid_user_params[:email]
       end
+
+      it 'assigns the applicant role by default' do
+        sign_up_request
+        user = User.find(json['user']['id'])
+        expect(user.role_name).to eq 'applicant'
+      end
     end
 
     context 'with invalid credentials' do

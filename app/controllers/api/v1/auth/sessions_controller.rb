@@ -10,9 +10,7 @@ class Api::V1::Auth::SessionsController < Devise::SessionsController
 
     render json: {
       message: 'Successfully logged in',
-      user: {
-        id: resource.id, email: resource.email
-      }
+      user: JSON.parse(User::UserSerializer.render(resource))
     }, status: :ok
   end
 

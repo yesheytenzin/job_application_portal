@@ -7,3 +7,8 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+%w[admin applicant].each do |role_name |
+  Role.find_or_create_by!(name: role_name)
+  puts "Role created: #{role_name}"
+end
