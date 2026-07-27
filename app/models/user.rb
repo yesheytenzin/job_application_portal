@@ -5,13 +5,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :validatable
   belongs_to :role
   validates :role, presence: true
-  delegate :name, to: :role, prefix: true
 
   def admin?
-    role_name == Role::ADMIN
+    role.name == 'admin'
   end
 
   def applicant?
-    role_name == Role::APPLICANT
+    role.name == 'applicant'
   end
 end
