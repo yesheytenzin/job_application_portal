@@ -11,28 +11,12 @@ RSpec.describe Role, type: :model do
 
   describe 'validation' do
     it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_uniqueness_of(:name).case_insensitive }
-  end
 
-  describe 'constant' do
-    it 'defines role name constant' do
-      expect(Role::ADMIN).to eq 'admin'
-      expect(Role::APPLICANT).to eq 'applicant'
-    end
-  end
-
-  describe 'scope' do
-    before do
-      create(:role, :admin)
+    it 'requires name to be unique' do
       create(:role, :applicant)
-    end
-
-    it 'returns admin' do
-      expect(described_class.admin.name).to eq 'admin'
-    end
-
-    it 'returns applicant' do
-      expect(described_class.applicant.name).to eq 'applicant'
+      duplicate_role = build(:role, :applicant)
+      expect(duplicate_role).not_to be_valid
+      expect(duplicate_role.errors[:name]).to include('has already been taken')
     end
   end
 

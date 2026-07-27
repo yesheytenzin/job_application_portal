@@ -1,15 +1,13 @@
 FactoryBot.define do
   factory :role do
-    name { Faker::Lorem.word.capitalize }
+    name { :applicant }
 
     trait :admin do
-      name { 'admin' }
-      initialize_with { Role.find_or_create_by!(name: name) }
+      name { :admin }
     end
 
     trait :applicant do
-      name { 'applicant' }
-      initialize_with { Role.find_or_create_by!(name: name) }
+      name { :applicant }
     end
   end
 end
