@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module AppError
-  class BadRequest < BaseError
-    def initialize(message = nil, status: :bad_request)
-      super I18n.t('errors.bad_request'), status
+  class BadRequestError < BaseError
+    def initialize(message = I18n.t('errors.bad_request'), status: :bad_request)
+      super message, status
     end
   end
 end

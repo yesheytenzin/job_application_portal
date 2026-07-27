@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module AppError
-  class Forbidden < BaseError
-    def initialize(message = nil, status: :forbidden)
-      super I18n.t('errors.forbidden'), status
+  class ForbiddenError < BaseError
+    def initialize(message = I18n.t('errors.forbidden'), status: :forbidden)
+      super message, status
     end
   end
 end
