@@ -8,12 +8,12 @@ class Api::V1::Auth::RegistrationsController < Devise::RegistrationsController
 
   def create
     build_resource(sign_up_params)
-    resource.role = Role.applicant
+    resource.role = Role.find_by!(name: :applicant)
     resource.save
 
     if resource.persisted?
       sign_in(resource_name, resource)
-      render json: User::UserSerializer.render(resource)
+      render json: User::UserSerializer.render(resource), status: :created
     else
       clean_up_passwords(resource)
       render json: {
