@@ -7,18 +7,13 @@ class Api::V1::Auth::RegistrationsController < Devise::RegistrationsController
   respond_to :json
 
   def create
-    build_resource(sign_up_params)
-    resource.role = Role.find_by!(name: :applicant)
-    resource.save
+    result = Api::V1::Auth::RegistrationService.new(sign_up_params).call
 
-    if resource.persisted?
-      sign_in(resource_name, resource)
-      render json: User::UserSerializer.render(resource), status: :created
+    if result.success?
+      sign_in(resource_name, result.resource)
+      render json: User::UserSerializer.render(result.resource), status: :created
     else
-      clean_up_passwords(resource)
-      render json: {
-        errors: resource.errors.as_json
-      }, status: :unprocessable_entity
+      render json: { errors: result.errors }, status: :unprocessable_entity
     end
   end
 end
