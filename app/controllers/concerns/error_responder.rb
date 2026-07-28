@@ -4,10 +4,10 @@ module ErrorResponder
   extend ActiveSupport::Concern
 
   included do
-    rescue_from BaseError, with: :handle_base_error
     rescue_from StandardError, with: :internal_server_error
     rescue_from ActionController::ParameterMissing, with: :handle_bad_request
     rescue_from ActiveRecord::RecordNotFound, with: :handle_not_found
+    rescue_from BaseError, with: :handle_base_error
   end
 
   private
