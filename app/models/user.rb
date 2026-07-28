@@ -5,6 +5,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :validatable
   belongs_to :role
   validates :role, presence: true
+  has_one :profile, dependent: :destroy
 
   def admin?
     role.name == ADMIN
