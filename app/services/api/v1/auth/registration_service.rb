@@ -4,7 +4,6 @@ module Api
   module V1
     module Auth
       class RegistrationService
-
         def initialize(sign_up_params)
           @sign_up_params = sign_up_params
         end

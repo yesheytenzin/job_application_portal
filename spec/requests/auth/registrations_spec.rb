@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::V1:Auth:Registrations', type: :request do
-
   describe 'POST /api/v1/auth/sign_up' do
     context 'with valid credentials' do
       subject(:sign_up_request) do
