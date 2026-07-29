@@ -13,7 +13,7 @@ RSpec.describe 'Api::V1::Auth::Sessions', type: :request do
         response
       end
 
-      let(:valid_user_params) { { email: valid_user.email, password: valid_user.password } }
+      let(:valid_user_params) { { email: valid_user.email, password: raw_password } }
 
       it 'for Login tests' do
         sign_in_request
@@ -45,7 +45,7 @@ RSpec.describe 'Api::V1::Auth::Sessions', type: :request do
       response
     end
 
-    let(:valid_user_params) { { email: valid_user.email, password: valid_user.password } }
+    let(:valid_user_params) { { email: valid_user.email, password: raw_password } }
 
     it 'for logout test' do
       sign_out_request

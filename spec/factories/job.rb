@@ -17,7 +17,7 @@ FactoryBot.define do
       status { OPEN }
     end
 
-    trait :close do
+    trait :closed do
       status { CLOSED }
     end
   end

@@ -11,13 +11,5 @@ FactoryBot.define do
     phone { generate(:phone) }
     address { Faker::Address.full_address }
     association :user, factory: :user
-
-    # trait :admin do
-    #   association :user, :admin
-    # end
-    #
-    # trait :applicant do
-    #   association :user, :applicant
-    # end
   end
 end
