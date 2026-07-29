@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resource :profile, only: [ :show, :update ], controller: :profiles
+      resources :jobs
     end
   end
 end
