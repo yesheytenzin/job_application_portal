@@ -38,6 +38,11 @@ RSpec.describe 'Api::V1::Jobs', type: :request do
         get api_v1_job_path(job.id)
         expect(response).to have_http_status(:ok)
       end
+
+      it 'does not show job having no id' do
+        get api_v1_job_path(1212)
+      expect(response).to have_http_status(:not_found)
+      end
     end
 
     context 'without authentication' do
@@ -57,7 +62,9 @@ RSpec.describe 'Api::V1::Jobs', type: :request do
       let(:valid_params) { attributes_for(:job) }
 
       it 'create job' do
-        post api_v1_jobs_path, params: { job: valid_params }
+        expect do
+          post api_v1_jobs_path, params: { job: valid_params }
+        end.to change(Job, :count).by(1)
         expect(response).to have_http_status(:created)
       end
     end
