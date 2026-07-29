@@ -6,7 +6,7 @@ module Sanitizers
       private
 
       def job_params
-        params.expect(job: [ :title, :description, :min_salary, :max_salary, :status ])
+        params.expect(job: [ :title, :description, :min_salary, :max_salary, :status, { attachements: [] } ])
       end
     end
   end
