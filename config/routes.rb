@@ -10,4 +10,10 @@ Rails.application.routes.draw do
       sessions: 'api/guard/sessions',
       registrations: 'api/guard/registrations'
     }
+
+  namespace :api do
+    namespace :v1 do
+      resource :profile, only: [ :show, :update ], controller: '/api/shared/profiles'
+    end
+  end
 end
