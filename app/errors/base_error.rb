@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 class BaseError < StandardError
-  attr_reader :status, :message
+  attr_reader :message, :status
 
   def initialize(message = nil, status = nil)
-    @status = status || :internal_server_error
     @message = message || self.class.name
+    @status = status || :internal_server_error
     super(@message)
 
     # Sentry.capture_exception(self)
-    Rails.logger.error "#{DateTime.current} AppError: Class: #{self.class.name}, Status: #{@status}, Error: #{@message}"
+    Rails.logger.error "#{DateTime.current} AppError: Class: #{self.class.name}, Status: #{status}, Error: #{@message}"
   end
 
   def to_h
