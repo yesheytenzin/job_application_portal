@@ -8,5 +8,5 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Role.find_or_create_by!(name: :applicant)
-Role.find_or_create_by!(name: :admin)
+Role.find_or_create_by!(name: APPLICANT)
+Role.find_or_create_by!(name: ADMIN)
