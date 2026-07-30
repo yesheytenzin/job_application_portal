@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :role, presence: true
   has_one :profile, dependent: :destroy
   has_many :jobs, dependent: :destroy
+  has_many :job_applications, dependent: :destroy
 
   def admin?
     role.name == ADMIN

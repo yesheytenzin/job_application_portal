@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resource :profile, only: [ :show, :update ], controller: :profiles
       resources :jobs
+      resources :job_applications
     end
   end
 end

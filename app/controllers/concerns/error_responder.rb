@@ -12,12 +12,10 @@ module ErrorResponder
 
   private
 
-  # 400 bad request
   def handle_bad_request(exception)
     render json: AppError::BadRequestError.new(exception.message).to_h, status: :bad_request
   end
 
-  # 404 not found
   def handle_not_found(exception)
     render json: AppError::NotFoundError.new(exception.message).to_h, status: :not_found
   end
@@ -31,6 +29,7 @@ module ErrorResponder
   def handle_base_error(exception)
     render json: exception.to_h, status: exception.status
   end
+
   def render_error(status, message)
     render json: { error: message }, status: status
   end
