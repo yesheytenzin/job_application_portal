@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Api::V1::Profiles', type: :request do
+RSpec.describe 'Api::Shared::Profiles', type: :request do
   include Devise::Test::IntegrationHelpers
 
   let(:user) { create :user }
@@ -67,9 +67,10 @@ RSpec.describe 'Api::V1::Profiles', type: :request do
     context 'when authenticated without a profile' do
       before { sign_in user }
 
-      it 'returns 404' do
-        put api_v1_profile_path, params: { profile: { first_name: 'X' } }
-        expect(response).to have_http_status(:not_found)
+      it 'returns create profile obj in memory and is updated on top' do
+        put api_v1_profile_path, params: { profile: { first_name: 'X', last_name: 'Y', username: 'yt', phone: '17509727', address: 'th'  } }
+        expect(response).to have_http_status(:ok)
+        expect(user.reload.profile.first_name).to eq('X')
       end
     end
 
