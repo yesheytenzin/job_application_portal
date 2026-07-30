@@ -17,7 +17,13 @@ RSpec.describe 'Api::Guard:Registrations', type: :request do
       it 'test registration' do
         sign_up_request
         expect(response).to have_http_status(:created)
-        expect(json[:user][:email]).to eq valid_user_params[:email]
+        expect(json[:email]).to eq valid_user_params[:email]
+      end
+
+      it 'assigns the applicant role by default' do
+        sign_up_request
+        user = User.find(json['id'])
+        expect(user.role[:name]).to eq 'applicant'
       end
     end
 
@@ -29,11 +35,10 @@ RSpec.describe 'Api::Guard:Registrations', type: :request do
 
       let(:invalid_user_params) {
         {
-          user: {
             email: Faker::Internet.email,
             password: Faker::Internet.password(min_length: 8),
             password_confirmation: Faker::Internet.password(min_length: 8)
-          }
+
         }
       }
 

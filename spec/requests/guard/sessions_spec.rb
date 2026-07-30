@@ -18,7 +18,7 @@ RSpec.describe 'Api::Guard::Sessions', type: :request do
       it 'for Login tests' do
         sign_in_request
         expect(response).to have_http_status(:ok)
-        expect(json.with_indifferent_access['user']['email']).to eq(valid_user_params[:email])
+        expect(json.with_indifferent_access['email']).to eq(valid_user_params[:email])
         expect(response.headers['Set-Cookie']).to be_present
       end
     end
@@ -38,7 +38,7 @@ RSpec.describe 'Api::Guard::Sessions', type: :request do
     end
   end
 
-  describe 'DELETE /api/v1/auth/sign_out' do
+  describe 'DELETE /api/guard/sign_out' do
     subject(:sign_out_request) do
       post user_session_path, params: { user: valid_user_params }
       delete destroy_user_session_path

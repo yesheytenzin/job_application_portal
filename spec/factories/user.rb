@@ -3,6 +3,15 @@ FactoryBot.define do
     email { Faker::Internet.unique.email }
     password { Faker::Internet.password(min_length: 8) }
     password_confirmation { password }
+    role { association(:role, :applicant) }
+
+    trait :applicant do
+      role { association(:role, :applicant) }
+    end
+
+    trait :admin do
+      role { association(:role, :admin) }
+    end
 
     trait :with_invalid_email do
       email { 'not a valid email' }
