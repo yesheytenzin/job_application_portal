@@ -1,8 +1,87 @@
-# Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+inherit_gem:
+  rubocop-rails-omakase: rubocop.yml
+  rubocop-rspec: config/default.yml
+  rubocop-faker: config/default.yml
+  rubocop-rake: config/default.yml
+#  rubocop-graphql: config/default.yml
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+plugins:
+  - rubocop-rspec
+  - rubocop-faker
+  - rubocop-rake
+  - rubocop-rails
+  - rubocop-performance
+ # - rubocop-graphql
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 4.0
+  Exclude:
+    - "db/schema.rb"
+    - "db/cache_schema.rb"
+    - "db/queue_schema.rb"
+    - "db/cable_schema.rb"
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+  Include:
+    - "**/*.rb"
+Lint/Debugger:
+  Enabled: true
+
+Layout/TrailingWhitespace:
+  AllowInHeredoc: true
+
+Style/Documentation:
+  Enabled: false
+
+# GraphQL/FieldDescription:
+#  Enabled: false
+
+# GraphQL/ArgumentDescription:
+#  Enabled: false
+
+# GraphQL/ExtractType:
+#  Enabled: false
+
+# GraphQL/ObjectDescription:
+#  Exclude:
+#    - "app/graphql/types/mutation_type.rb"
+#    - "app/graphql/types/query_type.rb"
+#    - "app/graphql/types/node_type.rb"
+#    - "app/graphql/dataloaders/*.rb"
+
+ # GraphQL/GraphqlName:
+ # Exclude:
+ #   - "app/graphql/mutations/**/**.rb"
+
+# -- RSpec --
+RSpec/MultipleExpectations:
+  Max: 15
+
+RSpec/ExampleLength:
+  Max: 40
+
+RSpec/NestedGroups:
+  Max: 5
+
+RSpec/ContextWording:
+  Prefixes:
+    - for
+    - when
+    - with
+    - without
+
+RSpec/AnyInstance:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
+
+RSpec/SpecFilePathFormat:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - "db/migrate/**/*.rb"
+    - "spec/**/*.rb"
