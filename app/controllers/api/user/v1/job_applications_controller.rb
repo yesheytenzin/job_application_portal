@@ -18,14 +18,14 @@ module Api
         end
 
         def show
-          render json: JobApplicationSerializer.render(@job_application)
+          render json: JobApplicationSerializer.render(@job_application), status: :ok
         end
 
         def create
           application = current_user.job_applications.new(job_application_params)
 
           if application.save
-            render json: JobApplicationSerializer.render(application), status: :ok
+            render json: JobApplicationSerializer.render(application), status: :created
           else
             render json: application.errors, status: :unprocessable_content
           end
