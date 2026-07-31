@@ -5,20 +5,27 @@ class JobApplicationSerializer < Blueprinter::Base
   fields :status, :user_id, :job_id
 
   fields :resume do |job_application|
-    next unless job_application.resume.attached?
-    {
-      id: job_application.resume.id,
-      filename: job_application.resume.filename.to_s,
-      content_type: job_application.resume.content_type
-    }
+    attached_payload(job_application.resume)
   end
 
   fields :cover_letter do |job_application|
-    next unless job_application.cover_letter.attached?
+    attached_payload(job_application.cover_letter)
+  end
+
+  private
+
+  def attached_payload(attachment)
+    return unless attachment.attached?
+    blob = attachment.blob
+
     {
-      id: job_application.cover_letter.id,
-      filename: job_application.cover_letter.filename.to_s,
-      content_type: job_application.cover_letter.content_type
+      id: blob.id,
+      filename: blob.filename.to_s,
+      content_type: blob.content_type,
+      url: Rails.application.routes.url_helpers.rails_blob_url(blob)
     }
   end
 end
+
+# configure environment.rb
+# config.default_url_options = { host: 'example.com' }
