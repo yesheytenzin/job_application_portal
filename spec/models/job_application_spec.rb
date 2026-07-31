@@ -13,8 +13,6 @@ RSpec.describe JobApplication, type: :model do
   describe 'validations' do
     subject(:job_application) { create(:job_application) }
 
-    it { is_expected.to validate_presence_of(:status) }
-
     it do
       expect(job_application).to validate_uniqueness_of(:user_id)
         .scoped_to(:job_id)

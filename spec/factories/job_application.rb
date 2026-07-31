@@ -5,22 +5,22 @@ FactoryBot.define do
     association :user
     association :job
 
-    status { SUBMITTED }
+    status { :submitted }
 
     trait :submitted do
-      status { SUBMITTED }
+      status { :submitted }
     end
 
     trait :reviewed do
-      status { REVIEWED }
+      status { :reviewed }
     end
 
     trait :rejected do
-      status { REJECTED }
+      status { :rejected }
     end
 
     trait :accepted do
-      status { ACCPETED }
+      status { :accepted }
     end
   end
 end
