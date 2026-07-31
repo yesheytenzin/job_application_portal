@@ -30,7 +30,7 @@ RSpec.describe Job, type: :model do
       job.attachments.attach(
         io: File.open(Rails.root.join('spec/fixtures/files/app.exe')),
         filename: 'app.exe',
-        content_type: 'octet-stream'
+        content_type: 'application/octet-stream'
       )
       expect(job).not_to be_valid
       expect(job.errors[:attachments]).to be_present

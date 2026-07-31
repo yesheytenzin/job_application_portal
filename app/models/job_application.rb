@@ -12,10 +12,8 @@ class JobApplication < ApplicationRecord
   has_one_attached :resume
   has_one_attached :cover_letter
 
-  validate :resume_type
-  validate :resume_size
-  validate :cover_type
-  validate :cover_size
+  validate :validate_resume
+  validate :validate_cover_letter
 
   def submitted?
     status == SUBMITTED
@@ -31,22 +29,5 @@ class JobApplication < ApplicationRecord
 
   def accepted?
     status == ACCEPTED
-  end
-
-  private
-  def resume_type
-    validate_attachment_types(:resume)
-  end
-
-  def cover_type
-    validate_attachment_types(:cover_letter)
-  end
-
-  def resume_size
-    validate_attachment_sizes(:resume)
-  end
-
-  def cover_size
-    validate_attachment_sizes(:cover_letter)
   end
 end
