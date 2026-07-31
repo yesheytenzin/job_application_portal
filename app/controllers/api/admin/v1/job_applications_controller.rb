@@ -17,7 +17,7 @@ module Api
         end
 
         def show
-          render json: JobApplicationSerializer.render(@job_applications), status: :ok
+          render json: JobApplicationSerializer.render(@job_application), status: :ok
         end
 
         def update
