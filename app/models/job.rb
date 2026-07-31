@@ -5,9 +5,8 @@ class Job < ApplicationRecord
   validates :title, :description, presence: true
   validates :min_salary, :max_salary, presence: true
   has_many_attached :attachments
-  validate :attachment_file_type
-  validate :attachment_file_size
   has_many :job_applications, dependent: :destroy
+  validate :validate_attachments
 
   def draft?
     status == DRAFT
@@ -19,14 +18,5 @@ class Job < ApplicationRecord
 
   def closed?
     status == CLOSED
-  end
-
-  private
-  def attachment_file_type
-    validate_attachment_types(:attachments)
-  end
-
-  def attachment_file_size
-    validate_attachment_sizes(:attachments)
   end
 end
