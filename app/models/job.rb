@@ -8,15 +8,9 @@ class Job < ApplicationRecord
   has_many :job_applications, dependent: :destroy
   validate :validate_attachments
 
-  def draft?
-    status == DRAFT
-  end
-
-  def open?
-    status == OPEN
-  end
-
-  def closed?
-    status == CLOSED
-  end
+  enum :status, {
+    draft: 'draft',
+    open: 'open',
+    closed: 'closed'
+  }
 end
