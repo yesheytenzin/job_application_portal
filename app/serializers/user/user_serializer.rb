@@ -5,4 +5,5 @@ class User::UserSerializer < Blueprinter::Base
   fields :email, :created_at, :updated_at
 
   association :role, blueprint: RoleSerializer
+  association :profile, blueprint: ProfileSerializer
 end

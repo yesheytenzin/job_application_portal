@@ -59,3 +59,4 @@ end
 gem "devise"
 gem "shoulda-matchers", "~> 8.0"
 gem "blueprinter"
+gem "pagy"
