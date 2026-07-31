@@ -58,7 +58,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_29_113520) do
     t.text "description"
     t.integer "max_salary"
     t.integer "min_salary"
-    t.string "status"
+    t.string "status", default: "draft"
     t.string "title"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false

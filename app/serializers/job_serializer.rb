@@ -9,7 +9,12 @@ class JobSerializer < Blueprinter::Base
       {
         id: attachment.id,
         filename: attachment.filename.to_s,
-        content_type: attachment.content_type
+        content_type: attachment.blob.content_type,
+        byte_size: attachment.blob.byte_size,
+        url: Rails.application.routes.url_helpers.rails_blob_url(
+          attachment,
+          host: 'localhost:3000'
+        )
       }
     end
   end
