@@ -2,11 +2,11 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Api::V1::Auth::Sessions', type: :request do
+RSpec.describe 'Api::Guard::Sessions', type: :request do
   let(:raw_password) { Faker::Internet.password(min_length: 8) }
   let!(:valid_user) { create(:user, password: raw_password, password_confirmation: raw_password) }
 
-  describe 'POST /api/v1/auth/sign_in' do
+  describe 'POST /api/guard/sign_in' do
     context 'with valid credentials' do
       subject(:sign_in_request) do
         post user_session_path, params: { user: valid_user_params }
@@ -38,7 +38,7 @@ RSpec.describe 'Api::V1::Auth::Sessions', type: :request do
     end
   end
 
-  describe 'DELETE /api/v1/auth/sign_out' do
+  describe 'DELETE /api/guard/sign_out' do
     subject(:sign_out_request) do
       post user_session_path, params: { user: valid_user_params }
       delete destroy_user_session_path
