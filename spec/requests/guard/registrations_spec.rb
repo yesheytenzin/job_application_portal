@@ -2,8 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Api::V1:Auth:Registrations', type: :request do
-  describe 'POST /api/v1/auth/sign_up' do
+RSpec.describe 'Api::Guard:Registrations', type: :request do
+  let(:user) { create(:user) }
+
+  describe 'POST /api/guard/sign_up' do
     context 'with valid credentials' do
       subject(:sign_up_request) do
         post user_registration_path, params: { user: valid_user_params }
