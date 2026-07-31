@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# fr# frozen_string_literal: true
 
 module Pagination
   extend ActiveSupport::Concern
@@ -10,24 +10,24 @@ module Pagination
   private
 
   def paginate(collection, blueprinter, root, options = {})
-    pagy, records = pagy(:offset, collection)
+    pagination, records = pagy(collection)
 
     {
-      "#{root}": blueprinter.render_as_hash(records, options),
+      root => blueprinter.render_as_hash(records, options),
       meta: {
-        page: pagy.page,
-        items: pagy.limit,
-        count: pagy.count,
-        pages: pagy.last,
-        prev: pagy.previous,
-        next: pagy.next,
+        page: pagination.page,
+        items: pagination.limit,
+        count: pagination.count,
+        pages: pagination.pages,
+        prev: pagination.previous,
+        next: pagination.next
       }
     }
   end
 
   def unpaginated(collection, blueprinter, root)
     {
-      "#{root}": blueprinter.render_as_hash(collection),
+      root => blueprinter.render_as_hash(collection),
       links: {},
       meta: {}
     }

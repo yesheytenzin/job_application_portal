@@ -7,7 +7,8 @@ module Api
         include Sanitizers::Job::JobSanitizer
 
         def index
-          render json: paginate(::Job.all, JobSerializer, :jobs), status: :ok
+          jobs = ::JobsQuery.new(params: params, current_user: current_user).query
+          render json: paginate(jobs, JobSerializer, :jobs), status: :ok
         end
 
         def show
