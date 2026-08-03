@@ -13,7 +13,7 @@ module Api
         if result.success?
           user = result.value!
           sign_in(resource_name, user)
-          render json: User::UserSerializer.render(user), status: :created
+          render json: UserSerializer.render(user), status: :created
         else
           render json: { errors: result.failure }, status: :unprocessable_entity
         end

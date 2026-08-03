@@ -6,6 +6,7 @@ class User < ApplicationRecord
   belongs_to :role
   has_one :profile, dependent: :destroy
   has_many :jobs, dependent: :destroy
+  has_many :job_applications, dependent: :destroy
   validates :email, uniqueness: { case_sensitive: false }
   validates :password, presence: true, confirmation: true, length: { within: Devise.password_length }
   validates :role, presence: true
