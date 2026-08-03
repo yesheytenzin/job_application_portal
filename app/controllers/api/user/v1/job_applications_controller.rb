@@ -9,12 +9,16 @@ module Api
         before_action :set_job_application, only: %i[ show ]
 
         def index
-          applications = current_user.job_applications
-            .includes(:job)
-            .with_attached_resume
-            .with_attached_cover_letter
+          applications = JobApplicationsQuery.new(
+            params: params,
+            current_user: current_user
+          ).query
 
-          render json: JobApplicationSerializer.render(applications), status: :ok
+          render json: paginate(
+            applications,
+            JobApplicationSerializer,
+            :job_applications
+          ), status: :ok
         end
 
         def show
