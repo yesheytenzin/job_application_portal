@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_29_113520) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_03_051147) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -40,6 +40,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_29_113520) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.string "answer"
+    t.datetime "created_at", null: false
+    t.bigint "job_application_id", null: false
+    t.bigint "question_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_application_id"], name: "index_answers_on_job_application_id"
+    t.index ["question_id"], name: "index_answers_on_question_id"
   end
 
   create_table "job_applications", force: :cascade do |t|
@@ -77,6 +87,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_29_113520) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "job_id", null: false
+    t.string "question"
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_questions_on_job_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
@@ -99,9 +117,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_29_113520) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "answers", "job_applications"
+  add_foreign_key "answers", "questions"
   add_foreign_key "job_applications", "jobs"
   add_foreign_key "job_applications", "users"
   add_foreign_key "jobs", "users"
   add_foreign_key "profiles", "users"
+  add_foreign_key "questions", "jobs"
   add_foreign_key "users", "roles"
 end
