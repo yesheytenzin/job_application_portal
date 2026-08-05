@@ -7,6 +7,7 @@ class Job < ApplicationRecord
   has_many_attached :attachments
   has_many :job_applications, dependent: :destroy
   validate :validate_attachments
+  has_many :questions, dependent: :destroy
 
   enum :status, {
     draft: 'draft',

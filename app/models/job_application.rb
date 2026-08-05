@@ -3,6 +3,7 @@ class JobApplication < ApplicationRecord
 
   belongs_to :user
   belongs_to :job
+  has_many :answers, dependent: :destroy
 
   validates :status, presence: true
   validates :user_id, uniqueness: { scope: :job_id }
