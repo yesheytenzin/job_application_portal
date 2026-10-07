@@ -3,26 +3,25 @@
 module Api
   module Guard
     class SessionsController < Devise::SessionsController
-      # before_action :configure_sign_in_params, only: [:create]
+      include Sanitizers::Auth::AuthSanitizer
+
       respond_to :json
 
       def create
-        self.resource = warden.authenticate!(auth_options)
-        sign_in(resource_name, resource)
+        result = ::Guard::SessionService.new(sign_in_params).call
 
-        render json: {
-          message: 'Successfully logged in',
-          user: {
-            id: resource.id, email: resource.email
-          }
-        }, status: :ok
+        if result.success?
+          user = result.value!
+          sign_in(resource_name, user)
+          render json: User::UserSerializer.render(user), status: :ok
+        else
+          render json: { errors: result.failure }, status: :unauthorized
+        end
       end
 
       def destroy
         sign_out(resource_name)
-        render json: {
-          message: 'Successfully logged out'
-        }, status: :ok
+        render json: { message: 'Successfully logged out' }, status: :ok
       end
     end
   end

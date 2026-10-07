@@ -4,26 +4,18 @@ module Api
   module Guard
     class RegistrationsController < Devise::RegistrationsController
       include Sanitizers::Auth::AuthSanitizer
+
       respond_to :json
 
       def create
-        build_resource(sign_up_params)
+        result = ::Guard::RegistrationService.new(sign_up_params).call
 
-        resource.save
-        if resource.persisted?
-          sign_in(resource_name, resource)
-          render json: {
-            message: 'Signed up successfully and logged in',
-            user: {
-              id: resource.id,
-              email: resource.email
-            }
-          }, status: :created
+        if result.success?
+          user = result.value!
+          sign_in(resource_name, user)
+          render json: User::UserSerializer.render(user), status: :created
         else
-          clean_up_passwords(resource)
-          render json: {
-            errors: resource.errors.as_json
-          }, status: :unprocessable_entity
+          render json: { errors: result.failure }, status: :unprocessable_entity
         end
       end
     end

@@ -31,6 +31,9 @@ gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 2.0"
+gem "ruby-vips", "~> 2.0"
+
+gem 'dry-monads'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 gem "rack-cors"
@@ -46,7 +49,6 @@ group :development, :test do
   gem "rubocop-rake", require: false
   gem "brakeman", require: false
   gem "dotenv-rails"
-  gem "blueprinter", require: false
 end
 
 group :test do
@@ -56,3 +58,4 @@ end
 
 gem "devise"
 gem "shoulda-matchers", "~> 8.0"
+gem "blueprinter"
