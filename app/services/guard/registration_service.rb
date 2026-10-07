@@ -20,7 +20,7 @@ module Guard
     attr_reader :sign_up_params
     def build_resource
       resource = User.new(sign_up_params)
-      resource.role = Role.find_or_create_by!(name: :applicant)
+      resource.role = Role.find_or_create_by!(name: APPLICANT)
       resource
     end
   end

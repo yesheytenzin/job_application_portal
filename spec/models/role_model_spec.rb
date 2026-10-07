@@ -12,7 +12,7 @@ RSpec.describe Role, type: :model do
   describe 'validation' do
     it { is_expected.to validate_presence_of(:name) }
 
-    it 'requires name to be unique' do
+    it 'requires role name to be unique' do
       create(:role, :applicant)
       duplicate_role = build(:role, :applicant)
       expect(duplicate_role).not_to be_valid
