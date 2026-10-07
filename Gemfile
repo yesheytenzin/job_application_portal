@@ -33,7 +33,7 @@ gem "thruster", require: false
 gem "image_processing", "~> 2.0"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
-# gem "rack-cors"
+gem "rack-cors"
 
 group :development, :test do
   gem "bundler-audit", require: false
@@ -45,9 +45,14 @@ group :development, :test do
   gem "rubocop-faker", require: false
   gem "rubocop-rake", require: false
   gem "brakeman", require: false
+  gem "dotenv-rails"
+  gem "blueprinter", require: false
 end
 
 group :test do
   gem "rspec-rails"
   gem "simplecov", require: false
 end
+
+gem "devise"
+gem "shoulda-matchers", "~> 8.0"

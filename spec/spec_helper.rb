@@ -39,7 +39,7 @@ RSpec.configure do |config|
 
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
   # have no way to turn it off -- the option exists only for backwards
-  # compatibility in RSpec 3). It causes shared context metadata to be
+  # compatibility in RSpec 3). It causes auth context metadata to be
   # inherited by the metadata hash of host groups and examples, rather than
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
@@ -64,7 +64,7 @@ RSpec.configure do |config|
   # https://rspec.info/features/3-12/rspec-core/configuration/zero-monkey-patching-mode/
   config.disable_monkey_patching!
 
-  # Many RSpec users commonly either run the entire suite or an individual
+  # Many RSpec auth commonly either run the entire suite or an individual
   # file, and it's useful to allow more verbose output when running an
   # individual spec file.
   if config.files_to_run.one?
