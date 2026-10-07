@@ -5,7 +5,7 @@ class CreateJobs < ActiveRecord::Migration[8.1]
       t.text :description
       t.integer :min_salary
       t.integer :max_salary
-      t.string :status
+      t.string :status, default: 'draft'
 
       t.timestamps
     end

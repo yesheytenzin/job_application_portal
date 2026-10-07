@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 module Api
-  module Job
+  module User
     module V1
       class JobsController < BaseController
         include Sanitizers::Job::JobSanitizer
+        skip_before_action :authenticate_user!, only: %i[ index show ]
 
         def index
           jobs = ::JobsQuery.new(params: params, current_user: current_user).query

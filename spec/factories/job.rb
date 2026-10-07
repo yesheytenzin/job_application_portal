@@ -6,19 +6,19 @@ FactoryBot.define do
     description { Faker::Lorem.sentence }
     min_salary { Faker::Number.between(from: 30000, to: 31000) }
     max_salary { Faker::Number.between(from: 59000, to: 60000) }
-    status { DRAFT }
+    status { :draft }
     association :user, factory: :user
 
     trait :draft do
-      status { DRAFT }
+      status { :draft }
     end
 
     trait :open do
-      status { OPEN }
+      status { :open }
     end
 
     trait :closed do
-      status { CLOSED }
+      status { :closed }
     end
   end
 end
